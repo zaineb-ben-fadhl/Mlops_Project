@@ -7,4 +7,4 @@ class PredictionRequest(BaseModel):
 class PredictionResponse(BaseModel):
     prediction: int
     probability: float
-    model_version: str = "v2"
+    model_version: str = "v1"

@@ -3,7 +3,7 @@ import joblib
 import numpy as np
 
 BASE_DIR = Path(__file__).resolve().parent.parent
-MODEL_PATH = BASE_DIR / "models" / "model_v2.joblib"
+MODEL_PATH = BASE_DIR / "models" / "model_v1.joblib"
 
 _model = None
 
@@ -23,7 +23,6 @@ def predict(features: list[float]):
     pred = int(model.predict(X)[0])
     proba = float(model.predict_proba(X)[0].max())
 
-    # Logique v2 différente (exemple)
-    pred_v2 = 1 if proba > 0.7 else 0
+    # Pour v1, on ne touche pas à la prédiction
+    return pred, proba
 
-    return pred_v2, proba

@@ -25,7 +25,8 @@ def predict_endpoint(request: PredictionRequest):
 
         return PredictionResponse(
             prediction=pred,
-            probability=proba
+            probability=proba,
+            model_version="v1"  # <-- forcer ici
         )
     except ValueError as e:
         raise HTTPException(status_code=400, detail=str(e))
