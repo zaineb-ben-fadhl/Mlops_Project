@@ -39,9 +39,9 @@ mlops_Project/
 │       ├── zenml_step/
 │       └── zenml_pipelines/
 │
-├── streamlit_app/
-│   ├── app.py
-│   └── requirements.txt
+├── streamlit.py
+│   
+│   
 │
 ├── data/
 │   └── raw/
