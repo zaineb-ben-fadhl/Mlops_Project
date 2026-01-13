@@ -17,3 +17,5 @@ sqlalchemy-utils
 sqlmodel
 passlib
 pymysql
+prometheus_client
+boto3

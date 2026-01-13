@@ -9,19 +9,21 @@ app = FastAPI(
     version="1.0.0"
 )
 
+# Middleware pour monitoring
 app.middleware("http")(monitoring_middleware)
 
 @app.get("/")
 def root():
     return {"status": "API is running"}
 
-# 🔹 METRICS ENDPOINT
 @app.get("/metrics")
 def metrics():
-    return Response(
-        generate_latest(),
-        media_type=CONTENT_TYPE_LATEST
-    )
+    try:
+        return Response(generate_latest(), media_type=CONTENT_TYPE_LATEST)
+    except Exception as e:
+        print(f"Erreur metrics: {e}")
+        raise
 
+# Routers
 app.include_router(v1_router, prefix="/api/v1", tags=["v1"])
 app.include_router(v2_router, prefix="/api/v2", tags=["v2"])

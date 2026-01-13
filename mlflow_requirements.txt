@@ -1,0 +1,4 @@
+mlflow==2.7.0  # ou la version que tu utilises
+scikit-learn
+pandas
+joblib

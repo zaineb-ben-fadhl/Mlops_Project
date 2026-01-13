@@ -9,15 +9,19 @@ def train_model(
     y_train,
     model_name: str,
     exp_name: str,
+    max_iter: int = 1000,       # pour LogisticRegression
+    n_estimators: int = 100,    # pour RandomForest
+    max_depth: int = 5           # pour RandomForest
 ):
     """
     Entraîne un modèle ML et log dans MLflow.
     """
     if model_name == "logreg":
-        model = LogisticRegression(max_iter=1000)
+        model = LogisticRegression(max_iter=max_iter)
     elif model_name == "rf":
         model = RandomForestClassifier(
-            n_estimators=100,
+            n_estimators=n_estimators,
+            max_depth=max_depth,
             random_state=42,
         )
     else:
@@ -27,6 +31,12 @@ def train_model(
 
     mlflow.log_param("model_name", model_name)
     mlflow.log_param("experiment_name", exp_name)
+    if model_name == "logreg":
+        mlflow.log_param("max_iter", max_iter)
+    elif model_name == "rf":
+        mlflow.log_param("n_estimators", n_estimators)
+        mlflow.log_param("max_depth", max_depth)
+
     mlflow.sklearn.log_model(model, "model")
 
     return model
